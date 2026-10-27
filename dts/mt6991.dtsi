@@ -1,2 +1,37 @@
-// MT6991 shared hardware resources are pending verification against Dali's live FDT.
-// This placeholder is not a hardware description and must not be used for boot.
+/*
+ * Partial shared MT6991 inputs from Dali's read-only live FDT capture.
+ * Capture SHA-256: b1e31720e948e8769a2fcb7fd9a097c30b934200b8033692f9ed1214b1985182
+ * This fragment deliberately does not describe CPUs or DRAM; see README.md.
+ */
+
+/ {
+	#address-cells = <2>;
+	#size-cells = <2>;
+	interrupt-parent = <&intc>;
+
+	psci {
+		compatible = "arm,psci-1.0";
+		method = "smc";
+	};
+
+	intc: interrupt-controller@c400000 {
+		compatible = "arm,gic-v3";
+		#interrupt-cells = <4>;
+		#address-cells = <2>;
+		#size-cells = <2>;
+		#redistributor-regions = <1>;
+		interrupt-controller;
+		reg = <0 0x0c400000 0 0x40000>,
+		      <0 0x0c440000 0 0x200000>;
+		interrupts = <1 9 4 0>;
+		unixnu,adt-name = "intc";
+	};
+
+	timer {
+		compatible = "arm,armv8-timer";
+		interrupt-parent = <&intc>;
+		interrupts = <1 13 4 0>, <1 14 4 0>, <1 11 4 0>, <1 10 4 0>;
+		clock-frequency = <13000000>;
+		unixnu,adt-name = "timer";
+	};
+};
