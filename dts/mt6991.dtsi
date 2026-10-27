@@ -1,0 +1,2 @@
+// MT6991 shared hardware resources are pending verification against Dali's live FDT.
+// This placeholder is not a hardware description and must not be used for boot.

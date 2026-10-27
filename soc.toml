@@ -1,0 +1,10 @@
+schema_version = 2
+
+[soc]
+name = "mt6991"
+description = "MediaTek MT6991 shared bring-up (incomplete)"
+source_repository = "https://github.com/MiCode/MTK_kernel_device_modules.git"
+source_revision = "e45c3199537fbba9aae5fb06c31fc8dbd3c1dcee"
+
+[components]
+include = ["ArmCpu", "ArmDTPlatform"]
